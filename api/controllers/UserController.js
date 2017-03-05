@@ -12,6 +12,21 @@ module.exports = {
 		res.send('hello', 200);
 	},
 
+	get: function(req, res) {
+		var query = {
+			username: req.body.username
+		};
+
+		User.findOne(query).exec(function (err, user) {
+        	
+        	if(_.isUndefined(user))
+        		res.send('Unable to locate user', 400);
+        	else{
+        		res.send(user, 200);
+        	}
+		});
+	},
+
 	login: function(req, res) {
         var query = {
         	username: req.body.username
